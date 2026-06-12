@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>كارلي — إرسال السعر</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<link rel="stylesheet" href="style.css">
+<style>
+body{background:linear-gradient(135deg,#6B0026,#8B0032);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:1rem}
+.wrap{width:100%;max-width:420px}
+.logo-top{text-align:center;margin-bottom:1.25rem;color:rgba(255,255,255,.9);font-size:1.3rem;font-weight:700;display:flex;align-items:center;justify-content:center;gap:.5rem}
+.card{background:#fff;border-radius:20px;padding:1.75rem;box-shadow:0 20px 60px rgba(0,0,0,.3)}
+.order-header{background:var(--bg);border-radius:12px;padding:1rem;margin-bottom:1.25rem;border:1px solid var(--border)}
+.order-title{font-size:.72rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.75rem}
+.order-row{display:flex;justify-content:space-between;align-items:center;padding:.35rem 0;font-size:.875rem;border-bottom:1px solid var(--border)}
+.order-row:last-child{border:none}
+.ol{color:var(--muted)}
+.ov{font-weight:700;color:var(--text);text-align:left}
+.timer-strip{background:var(--brand-light);border:1px solid var(--brand-mid);border-radius:10px;padding:.625rem 1rem;margin-bottom:1.25rem;display:flex;align-items:center;gap:.625rem;font-size:.85rem}
+.timer-val{font-size:1.1rem;font-weight:700;color:var(--brand);min-width:32px}
+.price-label{font-size:.9rem;font-weight:700;color:var(--text);margin-bottom:.75rem}
+.price-big-input{width:100%;font-size:2.5rem;font-weight:700;text-align:center;border:2.5px solid var(--border);border-radius:14px;padding:.875rem;color:var(--text);margin-bottom:.875rem;outline:none;transition:border-color .15s}
+.price-big-input:focus{border-color:var(--brand);box-shadow:0 0 0 4px rgba(139,0,50,.1)}
+.quick-btns{display:grid;grid-template-columns:repeat(4,1fr);gap:.4rem;margin-bottom:1rem}
+.qb{border:1.5px solid var(--border);border-radius:8px;padding:.45rem .25rem;font-size:.8rem;font-weight:600;cursor:pointer;background:#fff;transition:all .15s;font-family:inherit;text-align:center}
+.qb:hover{border-color:var(--brand);color:var(--brand);background:var(--brand-light)}
+.note-input{width:100%;padding:.55rem .875rem;border:1.5px solid var(--border);border-radius:8px;font-size:.875rem;margin-bottom:1.125rem;font-family:inherit;outline:none}
+.note-input:focus{border-color:var(--brand)}
+.send-btn{width:100%;padding:1rem;font-size:1.05rem;font-weight:700;border-radius:12px;background:var(--brand);color:#fff;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:.5rem;transition:all .15s}
+.send-btn:hover{background:var(--brand-dark);transform:translateY(-1px)}
+.send-btn:disabled{opacity:.35;pointer-events:none;transform:none}
+.privacy-note{font-size:.72rem;color:var(--muted);text-align:center;margin-top:.875rem;display:flex;align-items:center;justify-content:center;gap:.3rem}
+.success-wrap{text-align:center;padding:1.5rem 1rem}
+.success-ico{font-size:4rem;display:block;margin-bottom:.875rem}
+.err-wrap{text-align:center;padding:1.5rem 1rem}
+.err-ico{font-size:3rem;display:block;margin-bottom:.875rem;color:var(--danger)}
+.loading-wrap{text-align:center;padding:2rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="logo-top"><i class="ti ti-tool"></i> كارلي — إرسال سعرك</div>
+  <div class="card">
+
+    <div id="stLoad" class="loading-wrap">
+      <div class="spinner" style="margin:0 auto 1rem"></div>
+      <p style="color:var(--muted);font-size:.875rem">جاري تحميل الطلب...</p>
+    </div>
+
+    <div id="stErr" style="display:none" class="err-wrap">
+      <span class="err-ico"><i class="ti ti-alert-circle"></i></span>
+      <h3 style="font-size:1.1rem;font-weight:700;margin-bottom:.5rem">رابط غير صحيح</h3>
+      <p style="color:var(--muted);font-size:.875rem" id="errMsg">تحقق من الرابط المرسل لك.</p>
+    </div>
+
+    <div id="stAlready" style="display:none" class="success-wrap">
+      <span class="success-ico">ℹ️</span>
+      <h3 style="font-size:1.1rem;font-weight:700;margin-bottom:.5rem">تم إرسال سعرك مسبقاً</h3>
+      <p style="color:var(--muted);font-size:.875rem">لقد أرسلت سعرك لهذا الطلب بالفعل.</p>
+    </div>
+
+    <div id="stForm" style="display:none">
+      <div class="order-header">
+        <div class="order-title"><i class="ti ti-package"></i> تفاصيل الطلب</div>
+        <div id="orderRows"></div>
+      </div>
+
+      <div class="timer-strip">
+        <i class="ti ti-clock" style="color:var(--brand)"></i>
+        <span>الوقت المتبقي:</span>
+        <span class="timer-val" id="timerDisp">90</span>
+        <span style="color:var(--muted)">ثانية</span>
+      </div>
+
+      <div class="price-label">سعرك للقطعة (درهم إماراتي)</div>
+      <input type="number" class="price-big-input" id="priceInp" placeholder="0" min="1" max="99999" oninput="onPriceChange()">
+
+      <div class="quick-btns" id="quickBtns"></div>
+
+      <input type="text" class="note-input" id="noteInp" placeholder="ملاحظة اختيارية: متوفر، يحتاج طلب...">
+
+      <button class="send-btn" id="sendBtn" disabled onclick="doSubmit()">
+        <i class="ti ti-send"></i> إرسال السعر الآن
+      </button>
+
+      <p class="privacy-note">
+        <i class="ti ti-shield-check"></i>
+        سعرك سيُقارن مع الموردين — العميل لن يرى اسمك أو رقمك
+      </p>
+    </div>
+
+    <div id="stOk" style="display:none" class="success-wrap">
+      <span class="success-ico">✅</span>
+      <h3 style="font-size:1.2rem;font-weight:700;margin-bottom:.5rem">تم إرسال سعرك!</h3>
+      <p style="color:var(--muted);font-size:.875rem;margin-bottom:1rem">تم استلام سعرك وسيُقارن مع الموردين الآخرين.</p>
+      <div style="background:#f0fdf4;border-radius:12px;padding:1rem;margin-bottom:.875rem">
+        <div style="font-size:.8rem;color:var(--success);margin-bottom:.25rem">سعرك المرسل</div>
+        <div style="font-size:2rem;font-weight:700;color:var(--success)" id="sentPriceShow">—</div>
+      </div>
+      <p style="font-size:.78rem;color:var(--muted)">شكراً! سيصل العميل أفضل سعر تلقائياً.</p>
+    </div>
+
+    <div id="stExpired" style="display:none" class="err-wrap">
+      <span class="success-ico">⏰</span>
+      <h3 style="font-size:1.1rem;font-weight:700;margin-bottom:.5rem">انتهى وقت الطلب</h3>
+      <p style="color:var(--muted);font-size:.875rem">انتهت مدة قبول الأسعار لهذا الطلب.</p>
+    </div>
+  </div>
+</div>
+
+<script src="data.js"></script>
+<script>
+var orderId  = null;
+var dealerId = null;
+var orderObj = null;
+var pageTimer= null;
+
+window.addEventListener('DOMContentLoaded', function(){
+  var params  = new URLSearchParams(window.location.search);
+  orderId     = params.get('order');
+  dealerId    = parseInt(params.get('dealer')) || 0;
+  var token   = params.get('t'); // timestamp لمنع الوصول بعد انتهاء الوقت
+
+  if(!orderId || !dealerId){ showErr('رابط غير صحيح.'); return; }
+
+  orderObj = getOrderById(orderId);
+
+  if(!orderObj){ showErr('لم يُعثر على هذا الطلب.'); return; }
+
+  // انتهى وقت الطلب؟
+  var created  = new Date(orderObj.createdAt).getTime();
+  var elapsed  = (Date.now() - created) / 1000;
+  if(elapsed > 90){ show('stExpired'); return; }
+
+  // أرسل هذا الديلر سعراً مسبقاً؟
+  if(orderObj.dealerPrices && orderObj.dealerPrices[dealerId] > 0){ show('stAlready'); return; }
+
+  renderForm(90 - Math.floor(elapsed));
+});
+
+function renderForm(remaining){
+  // تفاصيل الطلب
+  var rows = [
+    ['القطعة',   orderObj.part || '—'],
+    ['النوع',    (TYPE_NAMES[orderObj.type] || orderObj.type || '—')],
+    ['السيارة',  (orderObj.brand||'')+' '+(orderObj.model||'')+' '+(orderObj.year||'')],
+    ['الشاسي',   orderObj.chassis || '—'],
+    ['ملاحظات',  orderObj.notes   || '—']
+  ];
+  var html = '';
+  rows.forEach(function(r){
+    if(r[1] && r[1] !== '—' || r[0] === 'القطعة' || r[0] === 'السيارة')
+      html += '<div class="order-row"><span class="ol">'+r[0]+'</span><span class="ov">'+r[1]+'</span></div>';
+  });
+  document.getElementById('orderRows').innerHTML = html;
+
+  // أزرار سريعة
+  var qPrices = [50,100,150,200,300,400,500,750,1000,1500,2000,3000];
+  document.getElementById('quickBtns').innerHTML = qPrices.map(function(p){
+    return '<button class="qb" onclick="setQ('+p+')">'+p+'</button>';
+  }).join('');
+
+  show('stForm');
+  startPageTimer(remaining);
+}
+
+function startPageTimer(sec){
+  var r = sec;
+  var el = document.getElementById('timerDisp');
+  pageTimer = setInterval(function(){
+    r--;
+    if(el) el.textContent = r;
+    if(r <= 0){
+      clearInterval(pageTimer);
+      show('stExpired');
+    }
+  }, 1000);
+}
+
+function setQ(p){ document.getElementById('priceInp').value = p; onPriceChange(); }
+
+function onPriceChange(){
+  var v = parseFloat(document.getElementById('priceInp').value);
+  document.getElementById('sendBtn').disabled = !(v > 0);
+}
+
+function doSubmit(){
+  var price = parseFloat(document.getElementById('priceInp').value);
+  var note  = document.getElementById('noteInp').value.trim();
+  if(!price || price <= 0) return;
+
+  clearInterval(pageTimer);
+
+  // حفظ السعر في localStorage
+  var orders = getOrders();
+  var idx    = orders.findIndex(function(o){ return o.id === orderId; });
+  if(idx < 0){ showErr('لم يُعثر على الطلب.'); return; }
+
+  if(!orders[idx].dealerPrices) orders[idx].dealerPrices = {};
+  orders[idx].dealerPrices[dealerId] = price;
+  if(note){
+    if(!orders[idx].dealerNotes) orders[idx].dealerNotes = {};
+    orders[idx].dealerNotes[dealerId] = note;
+  }
+
+  // حساب أفضل سعر
+  var allP = Object.values(orders[idx].dealerPrices).filter(function(v){ return v > 0; });
+  if(allP.length > 0){
+    orders[idx].bestPrice = Math.min.apply(null, allP);
+    orders[idx].status    = 'priced';
+    orders[idx].pricedAt  = new Date().toISOString();
+  }
+  localStorage.setItem('carly_orders', JSON.stringify(orders));
+
+  document.getElementById('sentPriceShow').textContent = price.toLocaleString('ar') + ' درهم';
+  show('stOk');
+}
+
+function showErr(msg){ document.getElementById('errMsg').textContent = msg; show('stErr'); }
+function show(id){
+  ['stLoad','stErr','stAlready','stForm','stOk','stExpired'].forEach(function(s){
+    document.getElementById(s).style.display = s===id ? 'block' : 'none';
+  });
+}
+</script>
+</body>
+</html>

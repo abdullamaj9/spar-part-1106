@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>مستشفى الموسي التخصصي - دبي</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="agent-widget.css">
+</head>
+<body>
+
+<!-- ===== Top Bar ===== -->
+<div class="topbar">
+  <div class="container topbar-inner">
+    <div class="topbar-item">📍 شارع الشيخ زايد، دبي، الإمارات العربية المتحدة</div>
+    <div class="topbar-item">📞 04-123-4567 &nbsp; | &nbsp; ✉️ info@almousahospital.ae</div>
+    <div class="topbar-item">🕐 مفتوح 24 ساعة - الطوارئ متاحة دائماً</div>
+  </div>
+</div>
+
+<!-- ===== Navbar ===== -->
+<header class="navbar" id="navbar">
+  <div class="container navbar-inner">
+    <a href="#home" class="logo">
+      <span class="logo-icon">✚</span>
+      <span class="logo-text">مستشفى الموسي <span class="logo-sub">التخصصي</span></span>
+    </a>
+    <nav class="nav-links" id="navLinks">
+      <a href="#home">الرئيسية</a>
+      <a href="#about">من نحن</a>
+      <a href="#departments">الأقسام</a>
+      <a href="#doctors">الأطباء</a>
+      <a href="#services">الخدمات</a>
+      <a href="#testimonials">آراء المرضى</a>
+      <a href="#contact">اتصل بنا</a>
+    </nav>
+    <div class="nav-actions">
+      <a href="admin.html" class="btn btn-ghost">لوحة الإدارة</a>
+      <a href="#booking" class="btn btn-primary">حجز موعد</a>
+    </div>
+    <button class="nav-toggle" id="navToggle" aria-label="فتح القائمة">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- ===== Hero ===== -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <svg class="pulse-line" viewBox="0 0 1200 100" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0,50 L150,50 L180,20 L210,80 L240,10 L270,50 L420,50 L450,50 L480,30 L510,70 L540,50 L1200,50"
+          fill="none" stroke="rgba(255,255,255,0.18)" stroke-width="2"/>
+  </svg>
+  <div class="container hero-inner">
+    <div class="hero-text">
+      <span class="eyebrow">رعاية تستحقها عائلتك</span>
+      <h1>صحتك أمانة في أيدٍ متخصصة</h1>
+      <p>مستشفى الموسي التخصصي يقدّم رعاية طبية متكاملة بأعلى معايير الجودة العالمية، بفريق من الاستشاريين والأطباء المتخصصين، وتقنيات تشخيص وعلاج حديثة، في بيئة تجمع بين الدقة الطبية والراحة الإنسانية.</p>
+      <div class="hero-actions">
+        <a href="#booking" class="btn btn-primary btn-lg">احجز موعدك الآن</a>
+        <a href="#departments" class="btn btn-outline btn-lg">استعرض الأقسام</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><span class="stat-num" data-count="22">0</span><span class="stat-label">قسم طبي متخصص</span></div>
+        <div class="stat"><span class="stat-num" data-count="85">0</span><span class="stat-label">طبيب واستشاري</span></div>
+        <div class="stat"><span class="stat-num" data-count="18">0</span><span class="stat-label">عاماً من الخبرة</span></div>
+        <div class="stat"><span class="stat-num" data-count="50000">0</span><span class="stat-label">مريض سنوياً</span></div>
+      </div>
+    </div>
+    <div class="hero-card" id="quickBooking">
+      <h3>حجز موعد سريع</h3>
+      <form id="quickBookingForm" class="quick-form">
+        <div class="field">
+          <label for="qDept">القسم الطبي</label>
+          <select id="qDept" required>
+            <option value="">اختر القسم</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="qDoctor">الطبيب</label>
+          <select id="qDoctor" required>
+            <option value="">اختر الطبيب</option>
+          </select>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="qDate">التاريخ</label>
+            <input type="date" id="qDate" required>
+          </div>
+          <div class="field">
+            <label for="qTime">الوقت</label>
+            <select id="qTime" required>
+              <option value="">اختر الوقت</option>
+            </select>
+          </div>
+        </div>
+        <div class="field">
+          <label for="qName">الاسم الكامل</label>
+          <input type="text" id="qName" placeholder="اسمك الكامل" required>
+        </div>
+        <div class="field">
+          <label for="qPhone">رقم الهاتف</label>
+          <input type="tel" id="qPhone" placeholder="05XXXXXXXX" required>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">تأكيد الحجز</button>
+        <p class="form-note">سيتم التواصل معك لتأكيد الموعد خلال دقائق</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ===== About ===== -->
+<section class="section about" id="about">
+  <div class="container about-grid">
+    <div class="about-media">
+      <div class="about-img main-img" role="img" aria-label="واجهة مستشفى الموسي التخصصي"></div>
+      <div class="about-img small-img-1" role="img" aria-label="ممرات المستشفى الداخلية"></div>
+      <div class="about-img small-img-2" role="img" aria-label="غرف العمليات والتقنيات الحديثة"></div>
+      <div class="badge-floating">
+        <span class="badge-num">+18</span>
+        <span class="badge-text">عاماً من التميز الطبي</span>
+      </div>
+    </div>
+    <div class="about-content">
+      <span class="eyebrow">من نحن</span>
+      <h2>رحلة طويلة من الثقة والعطاء</h2>
+      <p>تأسس مستشفى الموسي التخصصي ليكون منارة طبية في قلب دبي، يجمع بين الخبرة العريقة والتقنيات العالمية الحديثة. نحرص على توفير تجربة علاجية متكاملة تبدأ من لحظة التواصل الأول وحتى المتابعة الكاملة بعد العلاج.</p>
+      <div class="mission-vision">
+        <div class="mv-card">
+          <h4>رؤيتنا</h4>
+          <p>أن نكون الوجهة الطبية الأولى في المنطقة، الموثوقة من العائلات والأفراد لجودة الرعاية والاهتمام الإنساني.</p>
+        </div>
+        <div class="mv-card">
+          <h4>رسالتنا</h4>
+          <p>تقديم خدمات تشخيصية وعلاجية متطورة، بأيدٍ متخصصة وقلوب رحيمة، مع التزام دائم بسلامة المريض وراحته.</p>
+        </div>
+      </div>
+      <div class="about-features">
+        <div class="feature"><span class="feature-icon">🏥</span><span>أقسام طبية متكاملة تخدم جميع الفئات العمرية</span></div>
+        <div class="feature"><span class="feature-icon">🔬</span><span>مختبرات وأشعة بأحدث التقنيات التشخيصية</span></div>
+        <div class="feature"><span class="feature-icon">👨‍⚕️</span><span>فريق طبي معتمد دولياً بخبرات متنوعة</span></div>
+        <div class="feature"><span class="feature-icon">🚑</span><span>خدمة طوارئ على مدار الساعة طوال أيام الأسبوع</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Departments ===== -->
+<section class="section departments" id="departments">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">الأقسام الطبية</span>
+      <h2>رعاية متخصصة تحت سقف واحد</h2>
+      <p class="section-sub">22 قسماً طبياً متكاملاً، يديره فريق من الاستشاريين والأخصائيين لتقديم تشخيص دقيق وعلاج فعّال.</p>
+    </div>
+    <div class="dept-grid" id="deptGrid"></div>
+  </div>
+</section>
+
+<!-- ===== Doctors ===== -->
+<section class="section doctors" id="doctors">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">فريقنا الطبي</span>
+      <h2>استشاريون وأخصائيون يستحقون ثقتك</h2>
+      <p class="section-sub">نخبة من الأطباء أصحاب الخبرة والشهادات المعتمدة دولياً.</p>
+    </div>
+    <div class="doctors-filter" id="doctorsFilter">
+      <button class="filter-btn active" data-filter="all">جميع الأقسام</button>
+    </div>
+    <div class="doctors-grid" id="doctorsGrid"></div>
+  </div>
+</section>
+
+<!-- ===== Services ===== -->
+<section class="section services" id="services">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">خدماتنا</span>
+      <h2>خدمات طبية شاملة</h2>
+      <p class="section-sub">من الفحص الدوري إلى العمليات الجراحية المتقدمة، نوفر كل ما تحتاجه رعايتك الصحية.</p>
+    </div>
+    <div class="services-grid" id="servicesGrid"></div>
+  </div>
+</section>
+
+<!-- ===== Booking ===== -->
+<section class="section booking-section" id="booking">
+  <div class="booking-bg"></div>
+  <div class="container booking-container">
+    <div class="section-head light">
+      <span class="eyebrow">نظام الحجز</span>
+      <h2>احجز موعدك في دقيقتين</h2>
+      <p class="section-sub">اختر القسم والطبيب والوقت المناسب لك، وسيقوم فريقنا بتأكيد الموعد فوراً.</p>
+    </div>
+    <div class="booking-card">
+      <form id="fullBookingForm" class="booking-form">
+        <div class="form-grid">
+          <div class="field">
+            <label for="bDept">القسم الطبي</label>
+            <select id="bDept" required>
+              <option value="">اختر القسم</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="bDoctor">الطبيب</label>
+            <select id="bDoctor" required>
+              <option value="">اختر الطبيب</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="bDate">تاريخ الموعد</label>
+            <input type="date" id="bDate" required>
+          </div>
+          <div class="field">
+            <label for="bTime">وقت الموعد</label>
+            <select id="bTime" required>
+              <option value="">اختر الوقت</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="bName">اسم المريض</label>
+            <input type="text" id="bName" placeholder="الاسم الكامل" required>
+          </div>
+          <div class="field">
+            <label for="bPhone">رقم الهاتف</label>
+            <input type="tel" id="bPhone" placeholder="05XXXXXXXX" required>
+          </div>
+          <div class="field">
+            <label for="bEmail">البريد الإلكتروني</label>
+            <input type="email" id="bEmail" placeholder="example@email.com">
+          </div>
+          <div class="field">
+            <label for="bAge">العمر</label>
+            <input type="number" id="bAge" placeholder="العمر" min="0" max="120">
+          </div>
+          <div class="field">
+            <label for="bGender">الجنس</label>
+            <select id="bGender">
+              <option value="">اختر</option>
+              <option value="male">ذكر</option>
+              <option value="female">أنثى</option>
+            </select>
+          </div>
+          <div class="field full-width">
+            <label for="bReason">سبب الزيارة</label>
+            <textarea id="bReason" rows="3" placeholder="اكتب وصفاً مختصراً لحالتك أو سبب الزيارة"></textarea>
+          </div>
+          <div class="field full-width">
+            <label for="bFile">رفع تقرير أو ملف طبي (اختياري)</label>
+            <input type="file" id="bFile">
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-lg btn-block">تأكيد الحجز</button>
+        <p class="form-note" id="bookingNote">سيتم منع تكرار حجز نفس الطبيب في نفس الوقت تلقائياً.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Testimonials ===== -->
+<section class="section testimonials" id="testimonials">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">آراء مرضانا</span>
+      <h2>قالوا عن تجربتهم معنا</h2>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p>تجربتي مع قسم القلب كانت أكثر من رائعة، الدكتور أعطاني وقتاً كافياً وشرح كل شيء بوضوح. شكراً لفريق مستشفى الموسي.</p>
+        <div class="testimonial-author">
+          <div class="avatar">س.أ</div>
+          <div><strong>سلطان أحمد</strong><span>دبي</span></div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p>قسم الأطفال متميز جداً، الممرضات والطبيبات تعاملن مع طفلي بحنان كبير. الحجز عبر الموقع كان سهلاً وسريعاً.</p>
+        <div class="testimonial-author">
+          <div class="avatar">م.ع</div>
+          <div><strong>مريم العلي</strong><span>الشارقة</span></div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p>أجريت عملية جراحية في قسم العظام، والمتابعة بعد العملية كانت دقيقة ومنظمة. أنصح بشدة بهذا المستشفى.</p>
+        <div class="testimonial-author">
+          <div class="avatar">خ.ر</div>
+          <div><strong>خالد الرشيدي</strong><span>أبوظبي</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FAQ ===== -->
+<section class="section faq" id="faq">
+  <div class="container faq-grid">
+    <div class="section-head">
+      <span class="eyebrow">الأسئلة الشائعة</span>
+      <h2>كل ما تحتاج معرفته</h2>
+      <p class="section-sub">إن لم تجد إجابة لسؤالك، يسعدنا تواصلك معنا في أي وقت.</p>
+    </div>
+    <div class="faq-list" id="faqList"></div>
+  </div>
+</section>
+
+<!-- ===== Contact ===== -->
+<section class="section contact" id="contact">
+  <div class="container contact-grid">
+    <div class="contact-info">
+      <span class="eyebrow">تواصل معنا</span>
+      <h2>نحن هنا من أجلك</h2>
+      <p>لأي استفسار أو حالة طارئة، فريقنا جاهز لمساعدتك على مدار الساعة.</p>
+      <div class="contact-items">
+        <div class="contact-item"><span class="ci-icon">📍</span><div><strong>العنوان</strong><span>شارع الشيخ زايد، دبي، الإمارات العربية المتحدة</span></div></div>
+        <div class="contact-item"><span class="ci-icon">📞</span><div><strong>الهاتف</strong><span>04-123-4567 / الطوارئ: 800-MOUSA</span></div></div>
+        <div class="contact-item"><span class="ci-icon">✉️</span><div><strong>البريد الإلكتروني</strong><span>info@almousahospital.ae</span></div></div>
+        <div class="contact-item"><span class="ci-icon">🕐</span><div><strong>أوقات العمل</strong><span>العيادات الخارجية: 8 ص - 10 م | الطوارئ: 24/7</span></div></div>
+      </div>
+      <div class="social-links">
+        <a href="#" aria-label="انستقرام">📷</a>
+        <a href="#" aria-label="تويتر">🐦</a>
+        <a href="#" aria-label="فيسبوك">📘</a>
+        <a href="https://wa.me/971566350025" target="_blank" rel="noopener" aria-label="واتساب">💬</a>
+      </div>
+    </div>
+    <div class="contact-form-wrap">
+      <form id="contactForm" class="contact-form">
+        <h3>أرسل لنا رسالة</h3>
+        <div class="field">
+          <label for="cName">الاسم</label>
+          <input type="text" id="cName" required>
+        </div>
+        <div class="field">
+          <label for="cPhone">رقم الهاتف</label>
+          <input type="tel" id="cPhone" required>
+        </div>
+        <div class="field">
+          <label for="cSubject">الموضوع</label>
+          <input type="text" id="cSubject" required>
+        </div>
+        <div class="field">
+          <label for="cMessage">الرسالة</label>
+          <textarea id="cMessage" rows="4" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">إرسال الرسالة</button>
+      </form>
+    </div>
+    <div class="map-wrap">
+      <iframe class="map-frame" loading="lazy"
+        src="https://www.google.com/maps?q=Sheikh+Zayed+Road,Dubai&output=embed"
+        title="موقع المستشفى على الخريطة"></iframe>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Footer ===== -->
+<footer class="footer">
+  <div class="container footer-grid">
+    <div class="footer-col">
+      <a href="#home" class="logo footer-logo">
+        <span class="logo-icon">✚</span>
+        <span class="logo-text">مستشفى الموسي <span class="logo-sub">التخصصي</span></span>
+      </a>
+      <p>رعاية طبية متكاملة بمعايير عالمية، في قلب مدينة دبي.</p>
+      <div class="social-links">
+        <a href="#" aria-label="انستقرام">📷</a>
+        <a href="#" aria-label="تويتر">🐦</a>
+        <a href="#" aria-label="فيسبوك">📘</a>
+        <a href="https://wa.me/971566350025" target="_blank" rel="noopener" aria-label="واتساب">💬</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>روابط سريعة</h4>
+      <a href="#about">من نحن</a>
+      <a href="#departments">الأقسام</a>
+      <a href="#doctors">الأطباء</a>
+      <a href="#services">الخدمات</a>
+      <a href="#booking">الحجز</a>
+    </div>
+    <div class="footer-col">
+      <h4>معلومات</h4>
+      <a href="#">الأخبار والمدونة</a>
+      <a href="#">الوظائف</a>
+      <a href="#">سياسة الخصوصية</a>
+      <a href="#">الشروط والأحكام</a>
+    </div>
+    <div class="footer-col">
+      <h4>تواصل معنا</h4>
+      <p>📍 شارع الشيخ زايد، دبي</p>
+      <p>📞 04-123-4567</p>
+      <p>✉️ info@almousahospital.ae</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 مستشفى الموسي التخصصي - جميع الحقوق محفوظة. (موقع تجريبي - بيانات وهمية لأغراض العرض)</p>
+  </div>
+</footer>
+
+<!-- WhatsApp Floating Button -->
+<a href="#" class="whatsapp-float" id="whatsappFloat" aria-label="تواصل عبر واتساب">
+  💬
+</a>
+
+<div class="toast" id="toast"></div>
+
+<script src="data.js"></script>
+<script src="main.js"></script>
+<script src="agent-widget.js"></script>
+</body>
+</html>
